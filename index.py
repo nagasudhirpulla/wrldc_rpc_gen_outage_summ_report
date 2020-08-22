@@ -15,7 +15,7 @@ endDate = dt.datetime(2020, 4, 1)
 # %%
 # get an instance of argument parser from argparse module
 parser = argparse.ArgumentParser()
-# setup firstname, lastname arguements
+# setup firstname, lastname arguments
 parser.add_argument('--start_date', help="Enter Start date in yyyy-mm-dd format",
                     default=dt.datetime.strftime(startDate, '%Y-%m-%d'))
 parser.add_argument('--end_date', help="Enter last date in yyyy-mm-dd format",
