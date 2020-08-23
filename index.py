@@ -65,8 +65,7 @@ plannedNonRsdOutagesSumm = plannedNonRsdOutagesDf.groupby('ELEMENT_NAME')['outHr
 reportDf = forcedOutagesSumm.merge(plannedRsdOutagesSumm, on='ELEMENT_NAME', how='outer').merge(
     plannedNonRsdOutagesSumm, on='ELEMENT_NAME', how='outer')
 reportDf['CAPACITY'] = capacitySeries
-nowTimeStr = dt.datetime.timestamp(dt.datetime.now())
-nowTimeStr = str(nowTimeStr).replace('.', '')
+nowTimeStr = str(dt.datetime.timestamp(dt.datetime.now())).replace('.', '')
 reportDf.to_excel('dumps/report_data_{0}.xlsx'.format(nowTimeStr))
 
 # %%
