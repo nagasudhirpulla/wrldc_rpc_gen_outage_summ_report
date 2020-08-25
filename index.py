@@ -29,6 +29,9 @@ endDate = dt.datetime.strptime(args.end_date, '%Y-%m-%d')
 # %%
 endDate = endDate.replace(hour=23, minute=59, second=59)
 
+print('startDate = {0}, endDate = {1}'.format(dt.datetime.strftime(
+    startDate, '%Y-%m-%d'), dt.datetime.strftime(endDate, '%Y-%m-%d')))
+
 # get application config
 appConfig = getConfig()
 
