@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generators Outage Hours Viewer</title>
+</head>
+
+<body>
+    <form method="POST">
+        <input type="date" name="startDate" id="startDate" />
+        <input type="date" name="endDate" id="endDate" />
+        <button type="submit">Get Data</button>
+    </form>
+    {% if data%}
+    {{data.startDate}}, {{data.endDate}}
+    {% endif %}
+</body>
+
+</html>
