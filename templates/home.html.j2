@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generators Outage Hours Viewer</title>
+    <link rel="icon" 
+      type="image/png" 
+      href="{{ url_for('static', filename='favicon.png') }}">
 </head>
 
 <body>
@@ -13,8 +16,25 @@
         <input type="date" name="endDate" id="endDate" />
         <button type="submit">Get Data</button>
     </form>
-    {% if data%}
-    {{data.startDate}}, {{data.endDate}}
+    {% if data %}
+    <table id='outagesTable' class='display' stye='width=100%'>
+    </table>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='node_modules/datatables.net-dt/css/jquery.dataTables.min.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='node_modules/jquery/dist/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='node_modules/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='node_modules/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='node_modules/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='home.js') }}"></script>
+    <script>
+        document.getElementById('startDate').value = "{{data.startDate}}".substring(0,10);
+        document.getElementById('endDate').value = "{{data.endDate}}".substring(0,10);
+        var _outageRows = [];
+        $(document).ready(function() {
+            _outageRows = {{ data.outages }}
+            initOutagesTable(_outageRows);
+        });
+    </script>
+
     {% endif %}
 </body>
 

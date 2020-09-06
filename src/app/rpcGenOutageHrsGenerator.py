@@ -8,6 +8,15 @@ class RpcGenOutageHrsGenerator():
         self.reportsConStr = reportsConStr
 
     def getGenOutageHrs(self, startDate: dt.datetime, endDate: dt.datetime) -> pd.DataFrame:
+        """returns the generator outages hours info for RPC report
+
+        Args:
+            startDate (dt.datetime): start Date
+            endDate (dt.datetime): end Date
+
+        Returns:
+            pd.DataFrame: generator outages hours info
+        """        
         outages = fetchGenUnitOutagesForWindow(
             self.reportsConStr, startDate, endDate)
 

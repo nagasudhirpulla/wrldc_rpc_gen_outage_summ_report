@@ -4,6 +4,7 @@ config.xlsx
 __pycache__
 *.py[cod]
 *$py.class
+project_env/
 
 # Distribution / packaging 
 .Python build/ 
