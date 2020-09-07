@@ -2,7 +2,7 @@ from src.config.appConfig import getConfig
 from flask import Flask, request, jsonify, render_template
 from src.app.rpcGenOutageHrsGenerator import RpcGenOutageHrsGenerator
 import datetime as dt
-# from waitress import serve
+from waitress import serve
 
 app = Flask(__name__)
 
@@ -33,5 +33,8 @@ def rpcGenHrs():
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=int(appConfig['flaskPort']), debug=True)
-    # serve(app, host='0.0.0.0', port=int(appConfig['flaskPort']), threads=1)
+    serverMode: str = appConfig['mode']
+    if serverMode.lower() == 'd':
+        app.run(host="0.0.0.0", port=int(appConfig['flaskPort']), debug=True)
+    else:
+        serve(app, host='0.0.0.0', port=int(appConfig['flaskPort']), threads=1)
