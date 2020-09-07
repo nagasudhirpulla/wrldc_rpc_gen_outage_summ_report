@@ -22,9 +22,15 @@ def rpcGenHrs():
         outagesInfoGenerator = RpcGenOutageHrsGenerator(reportsConStr)
         outageHrsInfo = outagesInfoGenerator.getGenOutageHrs(
             startDate, endDate).reset_index(level=0).fillna(0).rename(
-                columns={"CAPACITY": "Installed_Cap", 'ELEMENT_NAME': 'Generator'}).to_dict('records')
+                columns={"CAPACITY": "Installed_Cap", 'ELEMENT_NAME': 'Generator'})
+        reqGenNames = ("CGPL", "GADARWARA", "JPL", "KAWAS", "KSTPS", "Khargone",
+                       "MB Power", "Mouda", "SIPAT", "Sasan", "VSTPS", "Gandhar", "Solapur", "Lara")
+        outageHrsInfo = outageHrsInfo[outageHrsInfo.apply(
+            lambda x: x['Generator'].startswith(reqGenNames), axis=1)]
+        outageHrsInfo = outageHrsInfo.to_dict('records')
         return render_template('home.html.j2', data={'startDate': startDate, 'endDate': endDate, 'outages': outageHrsInfo})
     return render_template('home.html.j2')
+
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=int(appConfig['flaskPort']), debug=True)

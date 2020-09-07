@@ -11,11 +11,13 @@
 </head>
 
 <body>
+    <h2 id='mainHead'>Generator Outage Hours report for RPC</h2>
     <form method="POST">
         <input type="date" name="startDate" id="startDate" />
         <input type="date" name="endDate" id="endDate" />
         <button type="submit">Get Data</button>
     </form>
+    <br/>
     {% if data %}
     <table id='outagesTable' class='display' stye='width=100%'>
     </table>
@@ -26,8 +28,11 @@
     <script type="text/javascript" src="{{ url_for('static', filename='node_modules/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='home.js') }}"></script>
     <script>
-        document.getElementById('startDate').value = "{{data.startDate}}".substring(0,10);
-        document.getElementById('endDate').value = "{{data.endDate}}".substring(0,10);
+        var startDate = "{{data.startDate}}".substring(0,10);
+        var endDate = "{{data.startDate}}".substring(0,10);
+        document.getElementById('startDate').value = startDate;
+        document.getElementById('endDate').value = endDate;
+        document.getElementById('mainHead').innerHTML = "Generator Outage Hours report for RPC from " + startDate + " to " + endDate;
         var _outageRows = [];
         $(document).ready(function() {
             _outageRows = {{ data.outages }}
