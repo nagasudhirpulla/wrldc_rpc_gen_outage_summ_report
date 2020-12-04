@@ -19,6 +19,9 @@ def rpcGenHrs():
     if request.method == 'POST':
         startDate = dt.datetime.strptime(request.form['startDate'], '%Y-%m-%d')
         endDate = dt.datetime.strptime(request.form['endDate'], '%Y-%m-%d')
+        # make end date time as 23:59:59
+        endDate = endDate.replace(
+                hour=23, minute=59, second=59, microsecond=0)
         outagesInfoGenerator = RpcGenOutageHrsGenerator(reportsConStr)
         outageHrsInfo = outagesInfoGenerator.getGenOutageHrs(
             startDate, endDate).reset_index(level=0).fillna(0).rename(
