@@ -26,7 +26,7 @@ def rpcGenHrs():
         outageHrsInfo = outagesInfoGenerator.getGenOutageHrs(
             startDate, endDate).reset_index(level=0).fillna(0).rename(
                 columns={"CAPACITY": "Installed_Cap", 'ELEMENT_NAME': 'Generator'})
-        reqGenNames = ("CGPL", "GADARWARA", "JPL", "KAWAS", "KSTPS", "Khargone",
+        reqGenNames = ("CGPL", "GADARWARA", "JPL", "Jhabua Power", "KAWAS", "KSTPS", "Khargone",
                        "MB Power", "Mouda", "SIPAT", "Sasan", "VSTPS", "Gandhar", "Solapur", "Lara")
         outageHrsInfo = outageHrsInfo[outageHrsInfo.apply(
             lambda x: x['Generator'].startswith(reqGenNames), axis=1)]

@@ -24,10 +24,6 @@ class RpcGenOutageHrsGenerator():
             columns=outages['columns'], data=outages['rows'])
         outagesDf['outHrs'] = ((outagesDf['REVIVED_DATETIME'] -
                                 outagesDf['OUTAGE_DATETIME']).dt.total_seconds())*(1/3600)
-        outagesDf = pd.DataFrame(
-            columns=outages['columns'], data=outages['rows'])
-        outagesDf['outHrs'] = ((outagesDf['REVIVED_DATETIME'] -
-                                outagesDf['OUTAGE_DATETIME']).dt.total_seconds())*(1/3600)
 
         capacitySeries = outagesDf.groupby('ELEMENT_NAME')[
             'CAPACITY'].agg(lambda x: x.iloc[0])
